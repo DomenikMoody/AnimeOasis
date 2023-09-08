@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+
+def index(request):
+    return HttpResponse("Waddup Otakus. You're at the AnimeOasis index.")
