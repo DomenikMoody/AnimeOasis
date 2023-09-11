@@ -2,7 +2,10 @@ from django.db import models
 from django.core.exceptions import ValidationError
 # "python manage.py makemigrations app"
 #   creates the migration under app.migrations
-# "python mange.py migrate" applies them to db
+#   only run this if you update models
+#   stay tuned to see what changes django picks up on
+
+# "python mange.py migrate" applies migrations to db
 
 
 # Create your models here.
