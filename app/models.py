@@ -51,7 +51,7 @@ class Comment(models.Model):
     content = models.CharField(max_length=250)
 
 
-
+# this is a custom validator function
 def validate_rating(val):
         if 1 <= val <= 5:
             return val
@@ -59,7 +59,6 @@ def validate_rating(val):
             raise ValidationError("Ratings must be an integer between 1 and 5")
 
 class Rating(models.Model):
-
     show = models.ForeignKey(
         Anime,
         on_delete=models.CASCADE
@@ -72,4 +71,11 @@ class Rating(models.Model):
 
 
 class Playlist(models.Model):
-    pass
+    # Should playlist names be unique? Currently yes
+    playlist_name = models.CharField(100, unique=True)
+    summary = models.CharField(225)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    episodes = models.ManyToManyField(Anime)
