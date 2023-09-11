@@ -1,5 +1,9 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+# "python manage.py makemigrations app"
+#   creates the migration under app.migrations
+# "python mange.py migrate" applies them to db
+
 
 # Create your models here.
 # If a model does not have an attribute
@@ -11,7 +15,7 @@ from django.core.exceptions import ValidationError
 #   that references it
 
 class Anime(models.Model):
-    external_api_key = models.CharField(primary_key=True)
+    external_api_key = models.CharField(primary_key=True, max_length=500)
     # I think all we need is the api key?
     # unless we want to collect more data on each anime
     # as users query the external api for them
@@ -33,11 +37,16 @@ class User(models.Model):
     display_name = models.CharField(max_length=100, unique=False)
     favorite_show = models.ForeignKey(
         Anime,
+        null=True,
+        blank=True,
         on_delete=models.SET_NULL,
     )
     # models.ForeignKey defines a many-to-one relationship;
     # A user has one favorite anime,
     # but one anime can be favorited by many users
+    # null = True means the DB can store null for the column
+    # blank = True means a form can be submitted without this data
+    # idk why it's divied up like that
 
 class Comment(models.Model):
     show = models.ForeignKey(
@@ -72,8 +81,8 @@ class Rating(models.Model):
 
 class Playlist(models.Model):
     # Should playlist names be unique? Currently yes
-    playlist_name = models.CharField(100, unique=True)
-    summary = models.CharField(225)
+    playlist_name = models.CharField(max_length=100, unique=True)
+    summary = models.CharField(max_length=225)
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
