@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 # If a model does not have an attribute
@@ -11,6 +12,18 @@ from django.db import models
 
 class Anime(models.Model):
     external_api_key = models.CharField(primary_key=True)
+    # I think all we need is the api key?
+    # unless we want to collect more data on each anime
+    # as users query the external api for them
+    def get_average_rating(self):
+        """
+        Queries for all of an anime's ratings
+        and returns the average rating
+        """
+        # TODO: Implement this function so we can use
+        #  Anime.get_average_rating in the Views
+        pass
+
 
 
 class User(models.Model):
@@ -27,10 +40,35 @@ class User(models.Model):
     # but one anime can be favorited by many users
 
 class Comment(models.Model):
-    anime = models.ForeignKey
+    show = models.ForeignKey(
+        Anime,
+        on_delete=models.CASCADE
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    content = models.CharField(max_length=250)
 
-class Review(models.Model):
-    pass
+
+
+def validate_rating(val):
+        if 1 <= val <= 5:
+            return val
+        else:
+            raise ValidationError("Ratings must be an integer between 1 and 5")
+
+class Rating(models.Model):
+
+    show = models.ForeignKey(
+        Anime,
+        on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    star_rating = models.IntegerField(validators=[validate_rating])
 
 
 class Playlist(models.Model):
