@@ -30,7 +30,9 @@ DEBUG = os.getenv('DEBUG', False)
 ALLOWED_HOSTS = [os.getenv('ALLOW_HOST')]
 
 
-CORS_ALLOW_ALL_ORIGINS = True if APP_ENVIRONMENT == "dev" else False
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [os.getenv('CORS_ALLOWED_ORIGINS')]
+# ChatGPT says don't do this but ChatGPT isn't my mom
 
 
 # Application definition
