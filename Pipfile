@@ -8,6 +8,7 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-cors-headers = "*"
+pygments = "*"
 
 [dev-packages]
 
