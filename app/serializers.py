@@ -5,11 +5,14 @@ from app.models import Anime, User, Comment, Rating, Playlist
 # The serializers convert database model instances
 # Into JSON, or vice versa
 # IMPORTANT: We can use these to create new model instances from validated data
-
+# https://www.django-rest-framework.org/tutorial/1-serialization/
+# ModelSerializer comes with a lot of abstracted functionality
+# Including methods for creating/deleting
 class AnimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Anime
         fields = []
+        # TODO: figure out Anime model model
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
