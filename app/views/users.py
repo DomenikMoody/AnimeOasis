@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from app.models import User
 from app.serializers import UserSerializer
@@ -14,6 +15,7 @@ from app.serializers import UserSerializer
 
 # TODO: only the user in question should be able to edit, delete
 @csrf_exempt
+@api_view(['GET', 'POST'])
 def user_list(request):
     """
     list all users, or create a new user
@@ -33,6 +35,7 @@ def user_list(request):
             return JsonResponse(serializer.errors, status = 400)
 
 @csrf_exempt
+@api_view(['GET', 'PUT', 'DELETE'])
 def user_detail(request, pk):
     """
     Retrieve, edit, or delete one specific User

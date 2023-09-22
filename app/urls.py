@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import deprecatedviews
+from . import DEPRECATEDVIEWS
 
 from .views import users, playlists, animes, comments, ratings
 
@@ -8,8 +8,8 @@ from .views import users, playlists, animes, comments, ratings
 # from AnimeOasis.urls.py
 
 urlpatterns = [
-    path("", deprecatedviews.index, name="index"),
-    path("test/", deprecatedviews.testSearch, name="test"),
+    path("", DEPRECATEDVIEWS.index, name="index"),
+    path("test/", DEPRECATEDVIEWS.testSearch, name="test"),
     path("users/all/", users.user_list, name="all_users"),
     path("users/<int:pk>/", users.user_detail, name="user_by_id"),
 ]
