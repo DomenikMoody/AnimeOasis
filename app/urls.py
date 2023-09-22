@@ -10,9 +10,6 @@ from .views import users, playlists, animes, comments, ratings
 urlpatterns = [
     path("", deprecatedviews.index, name="index"),
     path("test/", deprecatedviews.testSearch, name="test"),
-    path("users/all", users.user_list, name="all users"),
-    path("users/", deprecatedviews.index, name="index"),
-    path("comments/", deprecatedviews.index, name="index"),
-    path("animes/", deprecatedviews.index, name="index"),
-    path("playlists/", deprecatedviews.index, name="index"),
+    path("users/all/", users.user_list, name="all_users"),
+    path("users/<int:pk>/", users.user_detail, name="user_by_id"),
 ]
