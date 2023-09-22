@@ -11,6 +11,8 @@ from app.serializers import UserSerializer
 # before calling the fetch from frontend
 # (django auto assigns csrf cookie)
 
+
+# TODO: only the user in question should be able to edit, delete
 @csrf_exempt
 def user_list(request):
     """
@@ -45,8 +47,14 @@ def user_detail(request, pk):
         serializer = UserSerializer(user)
         return JsonResponse(serializer)
 
-    if request.method == "PUT":
-        pass
+    elif request.method == "PUT":
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        else: return JsonResponse(serializer.errors, status=400)
 
-    if request.method == "DELETE":
-        pass
+    elif request.method == "DELETE":
+        user.delete()
+        return HttpResponse(status=204)

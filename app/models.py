@@ -31,8 +31,6 @@ class Anime(models.Model):
         #  Anime.get_average_rating in the Views
         pass
 
-
-
 class User(models.Model):
     username = models.CharField("username", max_length=100, unique=True)
     hashed_password = models.CharField("password", max_length=50)
@@ -62,7 +60,6 @@ class Comment(models.Model):
     )
     content = models.CharField(max_length=250)
 
-
 # this is a custom validator function
 def validate_rating(val):
         if 1 <= val <= 5:
@@ -80,7 +77,6 @@ class Rating(models.Model):
         on_delete=models.CASCADE
     )
     star_rating = models.IntegerField(validators=[validate_rating])
-
 
 class Playlist(models.Model):
     # Should playlist names be unique? Currently yes
