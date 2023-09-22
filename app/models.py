@@ -18,7 +18,7 @@ from django.core.exceptions import ValidationError
 #   that references it
 
 class Anime(models.Model):
-    external_api_key = models.CharField(primary_key=True, max_length=500)
+    external_api_id = models.CharField(max_length=500)
     # I think all we need is the api key?
     # unless we want to collect more data on each anime
     # as users query the external api for them

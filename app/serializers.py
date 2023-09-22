@@ -11,8 +11,8 @@ from app.models import Anime, User, Comment, Rating, Playlist
 class AnimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Anime
-        fields = []
-        # TODO: figure out Anime model model
+        fields = ['id', 'external_api_id']
+        # TODO: figure out Anime model
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
