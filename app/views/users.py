@@ -21,6 +21,7 @@ def user_list(request):
     """
     list all users, or create a new user
     """
+    print(request.user)
     User = get_user_model()
     if request.method == "GET":
         users = User.objects.all()
@@ -66,3 +67,9 @@ def user_detail(request, pk):
     elif request.method == "DELETE":
         user.delete()
         return HttpResponse(status=204)
+
+
+#TODO: Login, logout routes
+#A succesful login will see django adding a
+#user property to each request; an un-authenticated
+# request will have request.user == AnonymousUser
