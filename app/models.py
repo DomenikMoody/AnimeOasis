@@ -62,7 +62,7 @@ class User(AbstractUser):
     user_permissions: Similar to groups, this field is a many-to-many relationship with the Permission model, enabling fine-grained permissions control for users.
     """
     # These are the only columns we need to add:
-    bio = models.CharField("bio", max_length=500)
+    bio = models.CharField("bio", max_length=500, null=True, blank=True)
     favorite_show = models.ForeignKey(
         Anime,
         null=True,
