@@ -36,7 +36,7 @@ CORS_ALLOWED_ORIGINS = [os.getenv('CORS_ALLOWED_ORIGINS')]
 
 
 # Application definition
-
+AUTH_USER_MODEL = 'app.User'
 INSTALLED_APPS = [
     'app.apps.AppConfig',
     'django.contrib.admin',
