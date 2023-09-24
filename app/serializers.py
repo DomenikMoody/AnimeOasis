@@ -17,7 +17,7 @@ class AnimeSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','username','hashed_password','bio','display_name','favorite_show']
+        fields = ['id','username', 'first_name', 'last_name', 'bio','favorite_show']
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
