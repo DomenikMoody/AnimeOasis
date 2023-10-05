@@ -31,12 +31,13 @@ ALLOWED_HOSTS = [os.getenv('ALLOW_HOST')]
 
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [os.getenv('CORS_ALLOWED_ORIGINS')]
+
+CORS_ALLOWED_ORIGINS = [os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost*')]
 # ChatGPT says don't do this but ChatGPT isn't my mom
 
 
 # Application definition
-
+AUTH_USER_MODEL = 'app.User'
 INSTALLED_APPS = [
     'app.apps.AppConfig',
     'django.contrib.admin',

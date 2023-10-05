@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from app.models import Anime, User, Comment, Rating, Playlist
-
+from django.contrib.auth import get_user_model
 
 # The serializers convert database model instances
 # Into JSON, or vice versa
@@ -16,8 +16,18 @@ class AnimeSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id','username','hashed_password','bio','display_name','favorite_show']
+        model = get_user_model()
+        fields = ['id','username', 'first_name', 'last_name', 'bio','favorite_show', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        print(validated_data)
+        user = get_user_model().objects.create_user(
+            username = validated_data['username'],
+            # email = validated_data['email'],
+            password = validated_data['password']
+        )
+        return user
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

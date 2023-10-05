@@ -2,7 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
-from app.models import User
+# from app.models import User
+from django.contrib.auth import get_user_model
 from app.serializers import UserSerializer
 
 #TODO: refactor into class-based views
@@ -20,6 +21,8 @@ def user_list(request):
     """
     list all users, or create a new user
     """
+    print(request.user)
+    User = get_user_model()
     if request.method == "GET":
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
@@ -29,6 +32,7 @@ def user_list(request):
         data = JSONParser().parse(request)
         print(data)
         serializer = UserSerializer(data=data)
+        print('serialized req', serializer)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status = 201)
@@ -41,6 +45,7 @@ def user_detail(request, pk):
     """
     Retrieve, edit, or delete one specific User
     """
+    User = get_user_model()
     try:
         user = User.objects.get(pk=pk)
     except User.DoesNotExist:
@@ -62,3 +67,9 @@ def user_detail(request, pk):
     elif request.method == "DELETE":
         user.delete()
         return HttpResponse(status=204)
+
+
+#TODO: Login, logout routes
+#A succesful login will see django adding a
+#user property to each request; an un-authenticated
+# request will have request.user == AnonymousUser
