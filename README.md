@@ -15,7 +15,7 @@ Welcome to AnimeOasis, your ultimate destination for all things anime! 🌟 Imme
    pipenv shell
    pipenv install
    ```
-   NOTE: The [pipenv](https://pipenv.pypa.io/en/latest/) command requires both [pip](https://pip.pypa.io/en/stable/) and [virtualenv](https://virtualenv.pypa.io/en/latest/) to be installed on your machine. 
+   NOTE: The [pipenv](https://pipenv.pypa.io/en/latest/) command requires both [pip](https://pip.pypa.io/en/stable/) and [virtualenv](https://virtualenv.pypa.io/en/latest/) to be installed on your machine. Make sure these prerequisite packages are install and run `pip install pipenv` to gain access to the above commands.
 4. If you need to make changes to the database models, after doing so you must generate a new migration file:
    ```
    python manage.py makemigrations app
