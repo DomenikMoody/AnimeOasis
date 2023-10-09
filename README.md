@@ -16,4 +16,17 @@ Welcome to AnimeOasis, your ultimate destination for all things anime! 🌟 Imme
    pipenv install
    ```
    NOTE: The [pipenv](https://pipenv.pypa.io/en/latest/) command requires both [pip](https://pip.pypa.io/en/stable/) and [virtualenv](https://virtualenv.pypa.io/en/latest/) to be installed on your machine. 
-   
+4. If you need to make changes to the database models, after doing so you must generate a new migration file:
+   ```
+   python manage.py makemigrations app
+   ```
+   To apply the latest migration to your database, run:
+   ```
+   python manage.py migrate
+   ```
+5. Start the backend server with the following command:
+   ```
+   python manage.py runserver
+   ```
+   NOTE: By default, Django runs on port 8000; specify a port number after `runserver` to override this behavior.
+
