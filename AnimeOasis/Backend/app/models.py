@@ -68,13 +68,17 @@ class User(AbstractUser):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
+        related_name="favorited_by"
     )
     # models.ForeignKey defines a many-to-one relationship;
+    # related_name lets us access this relationship from the other side (Anime) by the specified name
     # A user has one favorite anime,
     # but one anime can be favorited by many users
     # null = True means the DB can store null for the column
     # blank = True means a form can be submitted without this data
     # idk why it's divied up like that
+    watch_history = models.ManyToManyField(Anime, related_name="watched_by")
+    
 
 
 class Comment(models.Model):
